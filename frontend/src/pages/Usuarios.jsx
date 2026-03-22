@@ -154,33 +154,36 @@ export default function Usuarios() {
   }
 
   return (
-    <div className={styles.usuariosContainer}>
-      <div className={styles.header}>
-        <h1>Gestión de Especialistas y Recepcionistas</h1>
-        <button className={styles.btnAgregar} onClick={handleAgregar}>
-          + Agregar Usuario
-        </button>
-      </div>
+    <div className={styles.container}>
+      <div className={styles.mainContent}>
+        <div className={styles.header}>
+          <h1>Gestión de Especialistas y Recepcionistas</h1>
+          <button className={styles.btnAgregar} onClick={handleAgregar}>
+            + Agregar Usuario
+          </button>
+        </div>
 
-      {error && <div className={styles.error}>{error}</div>}
-      {success && <div className={styles.success}>{success}</div>}
+        <div className={styles.messagesSection}>
+          {error && <div className={styles.error}>{error}</div>}
+          {success && <div className={styles.success}>{success}</div>}
+        </div>
 
-      <div className={styles.filtros}>
-        <select 
-          value={roleFilter} 
-          onChange={(e) => setRoleFilter(e.target.value)}
-        >
-          <option value="">Filtrar por rol...</option>
-          <option value="2">Especialista</option>
-          <option value="3">Recepcionista</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Buscar por nombre o email..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+        <div className={styles.filtrosSection}>
+          <select 
+            value={roleFilter} 
+            onChange={(e) => setRoleFilter(e.target.value)}
+          >
+            <option value="">Filtrar por rol...</option>
+            <option value="2">Especialista</option>
+            <option value="3">Recepcionista</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Buscar por nombre o email..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
 
       {usuariosFiltrados.length === 0 ? (
         <div className={styles.noResultados}>
@@ -200,8 +203,11 @@ export default function Usuarios() {
             </thead>
             <tbody>
               {usuariosFiltrados.map(usr => (
-                <tr key={usr.id}>
-                  <td>{usr.nombre}</td>
+                <tr key={usr.id} style={usuario.id === usr.id ? { backgroundColor: '#e8f4f8' } : {}}>
+                  <td>
+                    {usr.nombre}
+                    {usuario.id === usr.id && <span className={styles.tuCuenta}> (Tu cuenta)</span>}
+                  </td>
                   <td>{usr.email}</td>
                   <td>{getRoloBadge(usr.role_id)}</td>
                   <td>
@@ -212,12 +218,16 @@ export default function Usuarios() {
                       <button
                         className={styles.btnEditar}
                         onClick={() => handleEditar(usr)}
+                        disabled={usuario.id === usr.id}
+                        title={usuario.id === usr.id ? 'No puedes editar tu propia cuenta' : 'Editar usuario'}
                       >
                         Editar
                       </button>
                       <button
                         className={styles.btnEliminar}
                         onClick={() => handleEliminar(usr.id)}
+                        disabled={usuario.id === usr.id}
+                        title={usuario.id === usr.id ? 'No puedes eliminar tu propia cuenta' : 'Eliminar usuario'}
                       >
                         Eliminar
                       </button>
@@ -295,21 +305,21 @@ export default function Usuarios() {
               </select>
             </div>
 
-            <div className={styles.formGroup}>
-              <label>Sucursal</label>
-              <select
-                name="sucursal_id"
-                value={formData.sucursal_id}
-                onChange={handleInputChange}
-              >
-                <option value="">Seleccionar sucursal</option>
-                {sucursales.map(sucursal => (
-                  <option key={sucursal.id} value={sucursal.id}>
-                    {sucursal.nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {!editando ? (
+              <div className={styles.formGroup}>
+                <label>Sucursal</label>
+                <div className={styles.inputReadOnly}>
+                  {sucursales.find(s => s.id === usuario.sucursal_id)?.nombre || 'Tu sucursal'}
+                </div>
+              </div>
+            ) : (
+              <div className={styles.formGroup}>
+                <label>Sucursal</label>
+                <div className={styles.inputReadOnly}>
+                  {sucursales.find(s => s.id === formData.sucursal_id)?.nombre || 'N/A'}
+                </div>
+              </div>
+            )}
 
             <div className={styles.formAcciones}>
               <button
@@ -328,6 +338,7 @@ export default function Usuarios() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

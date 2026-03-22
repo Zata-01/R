@@ -32,8 +32,12 @@ router.get('/especialistas/:sucursalId', verificarToken, async (req, res) => {
 
 router.get('/', verificarToken, async (req, res) => {
     try {
+        const sucursalId = req.usuario.sucursal_id;
+        
+        // Gerentes solo pueden ver usuarios de su sucursal
         const [usuarios] = await pool.query(
-            'SELECT id, nombre, email, role_id, sucursal_id FROM usuarios ORDER BY nombre ASC'
+            'SELECT id, nombre, email, role_id, sucursal_id FROM usuarios WHERE sucursal_id = ? AND role_id != 1 ORDER BY nombre ASC',
+            [sucursalId]
         );
         res.json(usuarios);
     } catch (error) {
@@ -107,6 +111,21 @@ router.put('/:id', verificarToken, async (req, res) => {
             return res.status(400).json({ mensaje: 'Faltan datos requeridos' });
         }
 
+        // Obtener el usuario actual para verificar su rol
+        const [usuarioActual] = await pool.query(
+            'SELECT role_id FROM usuarios WHERE id = ?',
+            [id]
+        );
+
+        if (usuarioActual.length === 0) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        // No permitir editar gerentes
+        if (usuarioActual[0].role_id === 1) {
+            return res.status(403).json({ mensaje: 'No puedes editar a un gerente' });
+        }
+
         // Verificar si el email ya existe para otro usuario
         const [existingUser] = await pool.query(
             'SELECT id FROM usuarios WHERE email = ? AND id != ?',
@@ -143,10 +162,19 @@ router.delete('/:id', verificarToken, async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Evitar eliminar el último gerente
-        const [gerentes] = await pool.query('SELECT id FROM usuarios WHERE role_id = 1');
-        if (gerentes.length === 1 && parseInt(id) === gerentes[0].id) {
-            return res.status(400).json({ mensaje: 'No puedes eliminar el último gerente' });
+        // Obtener el usuario a eliminar
+        const [usuarioEliminando] = await pool.query(
+            'SELECT role_id FROM usuarios WHERE id = ?',
+            [id]
+        );
+
+        if (usuarioEliminando.length === 0) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        // No permitir eliminar gerentes
+        if (usuarioEliminando[0].role_id === 1) {
+            return res.status(403).json({ mensaje: 'No puedes eliminar a un gerente' });
         }
 
         await pool.query('DELETE FROM usuarios WHERE id = ?', [id]);

@@ -1,64 +1,131 @@
-.usuariosContainer {
-    padding: 20px;
-    background-color: #f5f5f5;
-    min-height: calc(100vh - 60px);
+.container {
+    padding: 30px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    animation: pageInAnimation 0.5s ease-out forwards;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes pageInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mainContent {
+    max-width: 1400px;
+    width: 100%;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(90deg, #2d6ba8 0%, #001a33 100%);
+    padding: 30px;
+    border-radius: 12px;
     margin-bottom: 30px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 33, 71, 0.2);
+    animation: headerSlideDown 0.6s ease-out forwards;
+}
+
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .header h1 {
-    color: #333;
+    font-size: 32px;
+    font-weight: 700;
     margin: 0;
-    font-size: 28px;
+    color: white;
 }
 
 .btnAgregar {
-    background-color: #4CAF50;
+    background-color: #2d6ba8;
     color: white;
     border: none;
     padding: 12px 24px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(45, 107, 168, 0.3);
 }
 
 .btnAgregar:hover {
-    background-color: #45a049;
+    background-color: #1e4d7b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 107, 168, 0.4);
 }
 
-.filtros {
-    margin-bottom: 20px;
+.filtrosSection {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
 }
 
-.filtros select {
-    padding: 8px 12px;
+.filtrosSection select,
+.filtrosSection input {
+    padding: 12px 15px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    height: 44px;
 }
 
-.filtros input {
+.filtrosSection select {
+    min-width: 200px;
+}
+
+.filtrosSection input {
     flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+}
+
+.filtrosSection select:focus,
+.filtrosSection input:focus {
+    outline: none;
+    border-color: #2d6ba8;
+    box-shadow: 0 0 0 3px rgba(45, 107, 168, 0.1);
 }
 
 .tablaContainer {
-    background-color: white;
-    border-radius: 8px;
+    background: white;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    animation: tableSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes tableSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .tabla {
@@ -67,20 +134,26 @@
 }
 
 .tabla thead {
-    background-color: #f8f8f8;
-    border-bottom: 2px solid #ddd;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
 }
 
 .tabla th {
-    padding: 12px;
+    padding: 16px;
     text-align: left;
     font-weight: 600;
     color: #333;
+    font-size: 14px;
 }
 
 .tabla td {
-    padding: 12px;
+    padding: 14px 16px;
     border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.tabla tbody tr {
+    transition: background-color 0.2s ease;
 }
 
 .tabla tbody tr:hover {
@@ -96,10 +169,11 @@
 .btnEliminar {
     padding: 6px 12px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: opacity 0.3s;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .btnEditar {
@@ -107,8 +181,16 @@
     color: white;
 }
 
-.btnEditar:hover {
-    opacity: 0.8;
+.btnEditar:hover:not(:disabled) {
+    background-color: #1976D2;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.btnEditar:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .btnEliminar {
@@ -116,8 +198,16 @@
     color: white;
 }
 
-.btnEliminar:hover {
-    opacity: 0.8;
+.btnEliminar:hover:not(:disabled) {
+    background-color: #d32f2f;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+}
+
+.btnEliminar:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 /* Modal */
@@ -132,21 +222,44 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .modal {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 30px;
     width: 90%;
     max-width: 500px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modal h2 {
     margin-top: 0;
     margin-bottom: 20px;
     color: #333;
+    font-size: 24px;
 }
 
 .formGroup {
@@ -157,30 +270,46 @@
     display: block;
     margin-bottom: 5px;
     color: #555;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 .formGroup input,
 .formGroup select {
     width: 100%;
-    padding: 10px;
+    padding: 10px 12px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 14px;
     box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.inputReadOnly {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
 }
 
 .formGroup input:focus,
 .formGroup select:focus {
     outline: none;
-    border-color: #2196F3;
-    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+    border-color: #2d6ba8;
+    box-shadow: 0 0 0 3px rgba(45, 107, 168, 0.1);
 }
 
 .formAcciones {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
     justify-content: flex-end;
 }
 
@@ -188,28 +317,32 @@
 .btnCancelar {
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    transition: opacity 0.3s;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .btnGuardar {
-    background-color: #4CAF50;
+    background-color: #7cb342;
     color: white;
 }
 
 .btnGuardar:hover {
-    opacity: 0.9;
+    background-color: #689f38;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(124, 179, 66, 0.3);
 }
 
 .btnCancelar {
-    background-color: #ddd;
+    background-color: #e0e0e0;
     color: #333;
 }
 
 .btnCancelar:hover {
-    opacity: 0.8;
+    background-color: #d0d0d0;
+    transform: translateY(-1px);
 }
 
 .loading {
@@ -221,20 +354,35 @@
 
 .error {
     background-color: #ffebee;
-    border: 1px solid #ef5350;
+    border-left: 4px solid #f44336;
     color: #c62828;
-    padding: 12px;
-    border-radius: 4px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
     margin-bottom: 20px;
+    animation: slideDown 0.3s ease-out forwards;
 }
 
 .success {
     background-color: #e8f5e9;
-    border: 1px solid #66bb6a;
+    border-left: 4px solid #7cb342;
     color: #2e7d32;
-    padding: 12px;
-    border-radius: 4px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
     margin-bottom: 20px;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .rolBadge {
@@ -265,4 +413,13 @@
     padding: 40px;
     color: #999;
     font-size: 14px;
+}
+
+.tuCuenta {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
 }
