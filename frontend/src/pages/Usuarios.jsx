@@ -40,7 +40,7 @@ export default function Usuarios() {
       setLoading(true);
       setError(null);
       const usuariosData = await usuariosService.getUsuarios();
-      const sucursalesData = await sucursalesService.obtenerSucursales();
+      const sucursalesData = await sucursalesService.getSucursales();
       
       setUsuarios(usuariosData);
       setSucursales(sucursalesData);
