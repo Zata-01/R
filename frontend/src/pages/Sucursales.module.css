@@ -1,0 +1,135 @@
+.container {
+    padding: 30px;
+    background: #f5f7fa;
+    min-height: 100vh;
+    animation: pageInAnimation 0.5s ease-out forwards;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes pageInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mainContent {
+    max-width: 1400px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #2d6ba8 0%, #001a33 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 33, 71, 0.2);
+    animation: headerSlideDown 0.6s ease-out forwards;
+}
+
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.searchSection {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #002147;
+    box-shadow: 0 0 0 3px rgba(0, 33, 71, 0.1);
+}
+
+.tableWrapper {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    animation: tableSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes tableSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table thead tr {
+    background: linear-gradient(90deg, #2d6ba8 0%, #001a33 100%);
+}
+
+.table th {
+    color: white;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    background: transparent;
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    background: white;
+}
+
+.table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.empty {
+    text-align: center;
+    color: #999;
+    padding: 40px !important;
+}
