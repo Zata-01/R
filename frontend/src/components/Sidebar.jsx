@@ -19,6 +19,7 @@ export default function Sidebar({ usuario }) {
       return [
         { label: 'Dashboard', path: '/' },
         { label: 'Sucursales', path: '/sucursales' },
+        { label: 'Usuarios', path: '/usuarios' },
         { label: 'Inventario', path: '/productos' },
         { label: 'Citas', path: '/citas' },
         { label: 'Notas Clínicas', path: '/notas-clinicas' },

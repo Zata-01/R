@@ -1,0 +1,268 @@
+.usuariosContainer {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 60px);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #333;
+    margin: 0;
+    font-size: 28px;
+}
+
+.btnAgregar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btnAgregar:hover {
+    background-color: #45a049;
+}
+
+.filtros {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtros select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.filtros input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.tablaContainer {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla thead {
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ddd;
+}
+
+.tabla th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+}
+
+.tabla td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.tabla tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.btnEditar,
+.btnEliminar {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.btnEditar {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btnEditar:hover {
+    opacity: 0.8;
+}
+
+.btnEliminar {
+    background-color: #f44336;
+    color: white;
+}
+
+.btnEliminar:hover {
+    opacity: 0.8;
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+.formAcciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.btnGuardar,
+.btnCancelar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.btnGuardar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btnGuardar:hover {
+    opacity: 0.9;
+}
+
+.btnCancelar {
+    background-color: #ddd;
+    color: #333;
+}
+
+.btnCancelar:hover {
+    opacity: 0.8;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #999;
+}
+
+.error {
+    background-color: #ffebee;
+    border: 1px solid #ef5350;
+    color: #c62828;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.success {
+    background-color: #e8f5e9;
+    border: 1px solid #66bb6a;
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.rolBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.rolBadge.especialista {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.rolBadge.recepcionista {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+.rolBadge.gerente {
+    background-color: #ffe0b2;
+    color: #e65100;
+}
+
+.noResultados {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 14px;
+}

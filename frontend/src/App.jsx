@@ -8,6 +8,7 @@ import Configuracion from './pages/Configuracion';
 import Historial from './pages/Historial';
 import NotasClinicas from './pages/NotasClinicas';
 import Productos from './pages/Productos';
+import Usuarios from './pages/Usuarios';
 import { logout } from './services/auth.service';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
@@ -49,6 +50,7 @@ function App() {
 
           <Route element={<ProtectedRoute rolesPermitidos={[1]} />}>
             <Route path="/sucursales" element={<Sucursales />} />
+            <Route path="/usuarios" element={<Usuarios />} />
             <Route path="/configuracion" element={<Configuracion />} />
           </Route>
 
