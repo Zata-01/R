@@ -3,9 +3,18 @@ import config from '../config.js';
 
 const API_BASE_URL = config;
 
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+};
+
 export async function getUsuarios() {
     try {
-        const response = await axios.get(`${API_BASE_URL}/usuarios`);
+        const response = await axios.get(`${API_BASE_URL}/usuarios`, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Error al obtener usuarios:', error);
@@ -15,7 +24,7 @@ export async function getUsuarios() {
 
 export async function getUsuariosPorRol(roleId) {
     try {
-        const response = await axios.get(`${API_BASE_URL}/usuarios/por-rol/${roleId}`);
+        const response = await axios.get(`${API_BASE_URL}/usuarios/por-rol/${roleId}`, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Error al obtener usuarios por rol:', error);
@@ -25,7 +34,7 @@ export async function getUsuariosPorRol(roleId) {
 
 export async function crearUsuario(usuario) {
     try {
-        const response = await axios.post(`${API_BASE_URL}/usuarios`, usuario);
+        const response = await axios.post(`${API_BASE_URL}/usuarios`, usuario, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Error al crear usuario:', error);
@@ -35,7 +44,7 @@ export async function crearUsuario(usuario) {
 
 export async function actualizarUsuario(id, usuario) {
     try {
-        const response = await axios.put(`${API_BASE_URL}/usuarios/${id}`, usuario);
+        const response = await axios.put(`${API_BASE_URL}/usuarios/${id}`, usuario, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Error al actualizar usuario:', error);
@@ -45,7 +54,7 @@ export async function actualizarUsuario(id, usuario) {
 
 export async function eliminarUsuario(id) {
     try {
-        const response = await axios.delete(`${API_BASE_URL}/usuarios/${id}`);
+        const response = await axios.delete(`${API_BASE_URL}/usuarios/${id}`, getAuthHeaders());
         return response.data;
     } catch (error) {
         console.error('Error al eliminar usuario:', error);
